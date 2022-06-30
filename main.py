@@ -47,5 +47,5 @@ async def hydrate():
         await general_channel.send("<:DrinkBlacky:968960217461174323> Pensez à vous hydrater !! <:DrinkBlacky:968960217461174323>")
 
 
-bot.run(os.getenv("TOKEN"))
+bot.run(os.environ["TOKEN"])
 
