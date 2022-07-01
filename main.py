@@ -2,13 +2,20 @@ import os
 import discord, datetime, asyncio
 from dotenv import load_dotenv
 from discord.ext import commands
+import music
 
-
-load_dotenv(dotenv_path='config')
+cogs = [music]
 
 default_intents = discord.Intents.default()
 default_intents.members = True
 bot = commands.Bot(command_prefix="!", intents=default_intents)
+
+for i in range(len(cogs)):
+    cogs[i].setup(bot)
+
+load_dotenv(dotenv_path='config')
+
+
 
 #Initialisation du Bot
 @bot.event
