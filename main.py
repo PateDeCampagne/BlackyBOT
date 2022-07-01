@@ -64,7 +64,31 @@ async def play(ctx, url : str):
 @bot.command(name="leave")
 async def leave(ctx):
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if voice.is_connected():
+        await voice.disconnect()
+    else:
+        await ctx.send("Je suis pas connecté chakal")
 
+@bot.command()
+async def pause(ctx):
+    voice = discord.utils.get(bot.voice_client, guild=ctx.guild)
+    if voice.is_playing():
+        voice.pause()
+    else:
+        await ctx.send('Je parle pas wsh')
+
+@bot.command()
+async def resume(ctx):
+    voice = discord.utils.get(bot.voice_client, guild=ctx.guild)
+    if voice.is_paused():
+        voice.resume()
+    else:
+        await ctx.send('Je chante déjà')
+
+@bot.command()
+async def stop(ctx):
+    voice = discord.utils.get(bot.voice_client, guild=ctx.guild)
+    voice.stop()
 
 bot.run(os.environ["TOKEN"])
 
