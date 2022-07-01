@@ -6,14 +6,14 @@ from discord.ext import commands
 
 #cogs = [music]
 
-default_intents = discord.Intents.default()
-default_intents.members = True
-bot = commands.Bot(command_prefix="!", intents=default_intents)
+#default_intents = discord.Intents.default()
+#default_intents.members = True
+bot = commands.Bot(command_prefix="!")#, intents=default_intents)
 
 #for i in range(len(cogs)):
  #   cogs[i].setup(bot)
 
-load_dotenv(dotenv_path='config')
+#load_dotenv(dotenv_path='config')
 
 
 
@@ -61,6 +61,9 @@ async def play(ctx, url : str, channel):
     if not voice.is_connected():
         await voiceChannel.connect()
 
+@bot.command(name="leave")
+async def leave(ctx):
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
 
 
 bot.run(os.environ["TOKEN"])
