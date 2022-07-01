@@ -2,20 +2,24 @@ import os
 import discord, datetime, asyncio
 from dotenv import load_dotenv
 from discord.ext import commands
-import music
+#import music
 
-cogs = [music]
+#cogs = [music]
 
 default_intents = discord.Intents.default()
 default_intents.members = True
 bot = commands.Bot(command_prefix="!", intents=default_intents)
 
-for i in range(len(cogs)):
-    cogs[i].setup(bot)
+#for i in range(len(cogs)):
+ #   cogs[i].setup(bot)
 
 load_dotenv(dotenv_path='config')
 
-
+@bot.command()
+async def play(ctx, url : str, channel):
+    voiceChannel = discord.utils.get(ctx.guild.voice.channels, name=channel)
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    await voiceChannel.connect()
 
 #Initialisation du Bot
 @bot.event
@@ -52,6 +56,9 @@ async def hydrate():
         wait_time = (then-now).total_seconds()
         await asyncio.sleep(wait_time)
         await general_channel.send("<:DrinkBlacky:968960217461174323> Pensez à vous hydrater !! <:DrinkBlacky:968960217461174323>", delete_after=9000)
+
+
+
 
 
 bot.run(os.environ["TOKEN"])
