@@ -53,13 +53,14 @@ async def hydrate():
         await asyncio.sleep(wait_time)
         await general_channel.send("<:DrinkBlacky:968960217461174323> Pensez à vous hydrater !! <:DrinkBlacky:968960217461174323>", delete_after=9000)
 
-@bot.command()
+@bot.command(pass_content = True)
 async def play(ctx, url : str):
-
-    voiceChannel = discord.utils.get(ctx.guild.voice.channels, name="Phasmophobia")
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-    if not voice.is_connected():
-        await voiceChannel.connect()
+    await ctx.send('Joining..')
+    if (ctx.author.voice):
+        channel = ctx.message.author.voice.channel
+        await channel.connect()
+    else:
+        await ctx.send("Bruh")
 
 @bot.command(name="leave")
 async def leave(ctx):
