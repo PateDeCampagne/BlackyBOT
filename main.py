@@ -15,7 +15,7 @@ bot = commands.Bot(command_prefix="!", intents=default_intents)
 
 load_dotenv(dotenv_path='config')
 
-@bot.command()
+@bot.command(name='play')
 async def play(ctx, url : str, channel):
     voiceChannel = discord.utils.get(ctx.guild.voice.channels, name=channel)
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
