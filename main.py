@@ -58,7 +58,7 @@ async def play(ctx, url : str):
         channel = ctx.message.author.voice.channel
         await channel.connect()
     else:
-        await ctx.channel.send("Bruh")
+        await ctx.send("Bruh")
 
 @bot.command()
 async def leave(ctx):
