@@ -3,4 +3,3 @@ discord.ext==0.8
 discord.py==1.7.3
 dnspython==1.16.0
 python_dotenv==0.20.0
-dotenv==0.0.5
