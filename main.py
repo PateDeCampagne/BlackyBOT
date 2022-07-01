@@ -8,7 +8,7 @@ cogs = [music]
 
 default_intents = discord.Intents.default()
 default_intents.members = True
-bot = commands.Bot(command_prefix="!", intents=default_intents)
+bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
 for i in range(len(cogs)):
     cogs[i].setup(bot)
