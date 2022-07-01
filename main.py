@@ -40,7 +40,10 @@ async def delete(ctx, number: int):
     messages = await ctx.channel.history(limit=number + 1).flatten()
     for each_message in messages:
         await each_message.delete()
-
+    voiceChannel = discord.utils.get(ctx.guild.voice.channels, name="Phasmophobia")
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if not voice.is_connected():
+       await voiceChannel.connect()
 
 @bot.event
 async def hydrate():
