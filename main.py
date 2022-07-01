@@ -9,11 +9,9 @@ cogs = [music]
 default_intents = discord.Intents.default()
 default_intents.members = True
 bot = commands.Bot(command_prefix="!", intents=default_intents)
-client = commands.Bot(command_prefix="!", intents=default_intents)
-for i in range(len(cogs)):
-    cogs[i].setup(client)
 
-client.run(os.environ["TOKEN"])
+for i in range(len(cogs)):
+    cogs[i].setup(bot)
 
 load_dotenv(dotenv_path='config')
 
