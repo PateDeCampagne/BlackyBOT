@@ -44,7 +44,7 @@ async def hydrate():
         then.replace(second=1)
         wait_time = (then-now).total_seconds()
         await asyncio.sleep(wait_time)
-        await general_channel.send("<:DrinkBlacky:968960217461174323> Pensez à vous hydrater !! <:DrinkBlacky:968960217461174323>")
+        await general_channel.send("<:DrinkBlacky:968960217461174323> Pensez à vous hydrater !! <:DrinkBlacky:968960217461174323>", delete_after=9000)
 
 
 bot.run(os.environ["TOKEN"])
