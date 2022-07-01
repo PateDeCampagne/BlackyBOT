@@ -15,8 +15,6 @@ bot = commands.Bot(command_prefix="!")#, intents=default_intents)
 
 #load_dotenv(dotenv_path='config')
 
-
-
 #Initialisation du Bot
 @bot.event
 async def on_ready():
@@ -60,9 +58,9 @@ async def play(ctx, url : str):
         channel = ctx.message.author.voice.channel
         await channel.connect()
     else:
-        await ctx.send("Bruh")
+        await ctx.channel.send("Bruh")
 
-@bot.command(name="leave")
+@bot.command()
 async def leave(ctx):
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     if voice.is_connected():
