@@ -53,13 +53,8 @@ async def hydrate():
         await asyncio.sleep(wait_time)
         await general_channel.send("<:DrinkBlacky:968960217461174323> Pensez à vous hydrater !! <:DrinkBlacky:968960217461174323>", delete_after=9000)
 
-@bot.command(name="play")
-async def play(ctx, url : int):
-    print('Attempting to join')
-
-    messages = await ctx.channel.history(limit=url + 1).flatten()
-    for each_message in messages:
-        await each_message.delete()
+@bot.command()
+async def play(ctx, url : str):
 
     voiceChannel = discord.utils.get(ctx.guild.voice.channels, name="Phasmophobia")
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
