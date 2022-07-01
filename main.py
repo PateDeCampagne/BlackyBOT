@@ -56,10 +56,10 @@ async def hydrate():
 @bot.command(name="play")
 async def play(ctx, url : str):
     print('Attempting to join')
-    voiceChannel = discord.utils.get(ctx.guild.voice.channels, name="Phasmophobia")
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-    if not voice.is_connected():
-        await voiceChannel.connect()
+    #voiceChannel = discord.utils.get(ctx.guild.voice.channels, name="Phasmophobia")
+    #voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    #if not voice.is_connected():
+    #    await voiceChannel.connect()
 
 @bot.command(name="leave")
 async def leave(ctx):
