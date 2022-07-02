@@ -49,13 +49,6 @@ async def hydrate():
 
 @bot.command(pass_content = True)
 async def play(ctx, url : str):
-    song_there = os.path.isfile('song_.mp3')
-    try:
-        if song_there:
-            os.remove('song_.mp3')
-    except PermissionError:
-        await ctx.send('Wait for the current playing music to end or use the <stop> command')
-        return
 
     await ctx.send('Joining..')
     if (ctx.author.voice):
@@ -64,7 +57,6 @@ async def play(ctx, url : str):
     else:
         await ctx.send("Bruh")
 
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     ctx.voice_client.stop()
     FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
     YDL_OPTIONS = {'format': 'bestaudio'}
@@ -78,27 +70,17 @@ async def play(ctx, url : str):
 
 @bot.command()
 async def leave(ctx):
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-    if voice.is_connected():
-        await voice.disconnect()
-    else:
-        await ctx.send("Je suis pas connecté chakal")
+    await ctx.voice_client.disconnect()
 
 @bot.command()
 async def pause(ctx):
-    voice = discord.utils.get(bot.voice_client, guild=ctx.guild)
-    if voice.is_playing():
-        voice.pause()
-    else:
-        await ctx.send('Je parle pas wsh')
+    await ctx.voice_client.pause()
+    await ctx.send("pause !")
 
 @bot.command()
 async def resume(ctx):
-    voice = discord.utils.get(bot.voice_client, guild=ctx.guild)
-    if voice.is_paused():
-        voice.resume()
-    else:
-        await ctx.send('Je chante déjà')
+    await ctx.voice_client.resume()
+    await ctx.send("pausen't !")
 
 @bot.command()
 async def stop(ctx):
