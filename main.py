@@ -49,7 +49,7 @@ async def hydrate():
 
 @bot.command(pass_content = True)
 async def play(ctx, url : str):
-    if not ctx.voice_client.is_connected():
+    if not (ctx.voice_client):
         await ctx.send('Joining..')
         if (ctx.author.voice):
             channel = ctx.message.author.voice.channel
