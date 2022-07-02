@@ -50,12 +50,14 @@ async def hydrate():
 @bot.command(pass_content = True)
 async def play(ctx, url : str):
 
-    await ctx.send('Joining..')
-    if (ctx.author.voice):
-        channel = ctx.message.author.voice.channel
-        await channel.connect()
-    else:
-        await ctx.send("Bruh")
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if not voice.is_connected():
+        await ctx.send('Joining..')
+        if (ctx.author.voice):
+            channel = ctx.message.author.voice.channel
+            await channel.connect()
+        else:
+            await ctx.send("Bruh")
 
     ctx.voice_client.stop()
     FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
