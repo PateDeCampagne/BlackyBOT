@@ -49,8 +49,7 @@ async def hydrate():
 
 @bot.command(pass_content = True)
 async def play(ctx, url : str):
-
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    voice = discord.utils.get(ctx.bot.voice_clients, guild=ctx.guild)
     if not voice.is_connected():
         await ctx.send('Joining..')
         if (ctx.author.voice):
