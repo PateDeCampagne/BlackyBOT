@@ -49,13 +49,13 @@ async def hydrate():
 
 @bot.command(pass_content = True)
 async def play(ctx, url : str):
-    song_there = os.path.isfile('song.mp3')
+    song_there = os.path.isfile('song_.mp3')
     try:
         if song_there:
-            os.remove('song.mp3')
+            os.remove('song_.mp3')
     except PermissionError:
         await ctx.send('Wait for the current playing music to end or use the <stop> command')
-
+        return
 
     await ctx.send('Joining..')
     if (ctx.author.voice):
@@ -77,8 +77,8 @@ async def play(ctx, url : str):
         ydl.download([url])
     for file in os.listdir("./"):
         if file.endswith('.mp3'):
-            os.rename(file, 'song.mp3')
-    voice.play(discord.FFmpegPCMAudio('song.mp3'))
+            os.rename(file, 'song_.mp3')
+    voice.play(discord.FFmpegPCMAudio('song_.mp3'))
 
 @bot.command()
 async def leave(ctx):
