@@ -56,7 +56,7 @@ async def play(ctx, url : str):
     except PermissionError:
         await ctx.send('Wait for the current playing music to end or use the <stop> command')
 
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+
     await ctx.send('Joining..')
     if (ctx.author.voice):
         channel = ctx.message.author.voice.channel
@@ -64,6 +64,7 @@ async def play(ctx, url : str):
     else:
         await ctx.send("Bruh")
 
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     ydl_opts = {
         'format': 'bestaudio/best',
         'postprocessors': [{
