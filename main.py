@@ -2,16 +2,12 @@ import os
 import discord, datetime, asyncio
 from dotenv import load_dotenv
 from discord.ext import commands
-#import music
+import youtube_dl
 
-#cogs = [music]
 
 #default_intents = discord.Intents.default()
 #default_intents.members = True
 bot = commands.Bot(command_prefix="!")#, intents=default_intents)
-
-#for i in range(len(cogs)):
- #   cogs[i].setup(bot)
 
 #load_dotenv(dotenv_path='config')
 
@@ -53,12 +49,35 @@ async def hydrate():
 
 @bot.command(pass_content = True)
 async def play(ctx, url : str):
+    song_there = os.path.isfile('song.mp3')
+    try:
+        if song_there:
+            os.remove('song.mp3')
+    except PermissionError:
+        await ctx.send('Wait for the current playing music to end or use the <stop> command')
+
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     await ctx.send('Joining..')
     if (ctx.author.voice):
         channel = ctx.message.author.voice.channel
         await channel.connect()
     else:
         await ctx.send("Bruh")
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+    for file in os.listdir("./"):
+        if file.endswith('.mp3'):
+            os.rename(file, 'song.mp3')
+    voice.play(discord.FFmpegPCMAudio('song.mp3'))
 
 @bot.command()
 async def leave(ctx):
