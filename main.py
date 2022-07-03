@@ -1,5 +1,5 @@
 import os
-import discord, datetime, asyncio
+import discord, datetime, asyncio, random
 from dotenv import load_dotenv
 from discord.ext import commands
 import youtube_dl
@@ -86,6 +86,11 @@ async def resume(ctx):
 async def stop(ctx):
     voice = discord.utils.get(bot.voice_client, guild=ctx.guild)
     voice.stop()
+@bot.event
+async def on_message(message):
+    if (message.author.id == 190155770854244353):
+        channel = message.channel
+        await channel.send("Super cringe wow")
 
 bot.run(os.environ["TOKEN"])
 
