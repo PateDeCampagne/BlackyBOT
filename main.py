@@ -102,7 +102,7 @@ async def resume(ctx):
 @bot.command()
 async def stop(ctx):
     voice = discord.utils.get(bot.voice_client, guild=ctx.guild)
-    voice.stop()
+    await voice.stop()
 #@bot.event
 #async def on_message(message):
  #   if (message.author.id == 190155770854244353):
